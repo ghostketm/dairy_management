@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dairy Management System</title>
+
+    <!-- Bootstrap CSS -->
+    {% load django_bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+
+    <!-- Custom CSS -->
+    <style>
+        body {
+            background-color: #4F7942; /* Green background */
+            color: #fff; /* White text */
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .container {
+            flex: 1;
+            background-color: #6B4226; /* Brown background */
+            padding: 20px;
+            border-radius: 5px;
+            margin-bottom: 20px; /* Adds spacing between content and footer */
+        }
+        footer {
+            margin-top: auto;
+            background-color: #6B4226; /* Brown background */
+            color: #fff;
+        }
+        .footer-container {
+            max-width: 1140px; /* Matches navbar width */
+            margin: 0 auto;
+            padding: 10px 20px;
+        }
+        .navbar {
+            background-color: #4F7942 !important; /* Green navbar */
+        }
+        .navbar .nav-link, .navbar .navbar-brand {
+            color: #fff !important; /* White text */
+        }
+        button {
+            background-color: #4F7942; /* Green button */
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #6B4226; /* Brown hover */
+        }
+        a.cancel-link {
+            color: #fff;
+            text-decoration: none;
+            margin-left: 10px;
+        }
+        a.cancel-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="{% url 'home' %}">
+                <img src="#" alt="" height="30"> 
+                Dairy Management
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
+                    </li>
+                    <!-- Dropdown Menu for Animals -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Animals
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="{% url 'bull_list' %}">Bulls</a></li>
+                            <li><a class="dropdown-item" href="{% url 'heifer_list' %}">Heifers</a></li>
+                            <li><a class="dropdown-item" href="{% url 'calf_list' %}">Calves</a></li>
+                        </ul>
+                    </li>
+                    <!-- Dropdown Menu for Records -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Records
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="{% url 'health_list' %}">Health</a></li>
+                            <li><a class="dropdown-item" href="{% url 'reproduction_list' %}">Reproduction</a></li>
+                            <li><a class="dropdown-item" href="{% url 'sales_list' %}">Sales</a></li>
+                            <li><a class="dropdown-item" href="{% url 'milking_list' %}">Milking</a></li>
+                            <li><a class="dropdown-item" href="{% url 'feeding_list' %}">Feeding</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'customer_list' %}">Customers</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'product_list' %}">Products</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'user_list' %}">Users</a> 
+                    </li>
+                </ul>
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        {% if user.is_authenticated %}
+                            <p>Welcome, {{ user.username }}!</p>
+                            <form method="post" action="{% url 'logout' %}">
+                                {% csrf_token %}
+                                <button type="submit">Logout</button>
+                            </form>
+                        {% else %}
+                            <a class="nav-link" href="{% url 'login' %}">Login</a>
+                        {% endif %}
+                    </li>
+                </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container py-4">
+        {% block content %}
+        {% endblock %}
+    </div>
+
+    <!-- Footer -->
+    <footer class="text-center py-3">
+        <div class="footer-container">
+            <p>&copy; 2023 Dairy Management System. All rights reserved.</p>
+            <p>Support: <a href="#">support@dairy.com</a> | Contact: <a href="#">contact@dairy.com</a></p>
+        </div>
+    </footer>
+
+</body>
+</html>

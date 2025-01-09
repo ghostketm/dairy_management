@@ -1,0 +1,40 @@
+{% extends 'dairy/base.html' %}
+
+<style>
+    /* Style the button with a brown background */
+    .btn-primary {
+        background-color: brown; /* Set button background to brown */
+        color: white; /* Ensure the button text is white */
+        border: none; /* Remove default border */
+    }
+    .btn-primary:hover {
+        background-color: darkbrown; /* Optional: darker brown on hover for better UX */
+    }
+    .card {
+        border-color: brown; /* Optional: add a brown border to the card */
+    }
+    /* Set all text inside the card to brown */
+    .card-body {
+        color: brown; /* Set text color to brown */
+    }
+</style>
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h2>Login</h2>
+                    <form method="post">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <button type="submit" class="btn btn-primary">Login</button>
+                    </form>
+                    <p>Don't have an account? Contact the admin to create one for you.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

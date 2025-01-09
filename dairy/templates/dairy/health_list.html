@@ -1,0 +1,22 @@
+{% extends 'dairy/base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-12">
+            <h1>Health Records</h1>
+            <ul class="list-group">
+                {% for record in objects %}
+                <li class="list-group-item">
+                    <a href="{% url 'health_update' record.pk %}">Record {{ record.id }}</a>
+                    <span class="float-end">
+                        <a href="{% url 'health_delete' record.pk %}" class="text-danger">Delete</a>
+                    </span>
+                </li>
+                {% endfor %}
+            </ul>
+            <a href="{% url 'health_create' %}" class="btn btn-primary float-end mt-3">Create New Health Record</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

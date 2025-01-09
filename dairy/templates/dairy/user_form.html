@@ -1,0 +1,61 @@
+{% extends 'dairy/base.html' %}
+{% load widget_tweaks %}
+
+<style>
+    /* Apply brown color to all text elements with increased specificity */
+    .container .form-label, 
+    .container .form-control, 
+    .container .card-header h1, 
+    .container label {
+        color: brown !important;
+    }
+    /* Button styling with increased specificity */
+    .container .btn-custom {
+        background-color: brown !important;
+        color: white !important; /* Button text color */
+        border: none; /* Remove any border */
+    }
+    .form-group {
+        margin-bottom: 1rem;
+    }
+</style>
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h1>{% if form.instance.pk %}Update{% else %}Create{% endif %} User</h1>
+                </div>
+                <div class="card-body">
+                    <form method="post" class="row">
+                        {% csrf_token %}
+                        <div class="form-group col-md-12">
+                            <label for="id_username">Username</label>
+                            {{ form.username|add_class:'form-control' }}
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label for="id_email">Email</label>
+                            {{ form.email|add_class:'form-control' }}
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label for="id_phone_number">Phone Number</label>
+                            {{ form.phone_number|add_class:'form-control' }}
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label for="id_address">Address</label>
+                            {{ form.address|add_class:'form-control' }}
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label for="id_password">Password</label>
+                            {{ form.password|add_class:'form-control' }}
+                        </div>
+                        <button type="submit" class="btn btn-custom">{% if form.instance.pk %}Update{% else %}Create{% endif %}</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

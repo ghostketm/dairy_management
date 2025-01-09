@@ -1,0 +1,14 @@
+/* Add your custom CSS here */
+body {
+    background-color: #f0f8ff; /* Light blue-green */
+    color: #333; 
+}
+.navbar-brand {
+    color: #fff; /* White */
+}
+.navbar-nav .nav-link {
+    color: #fff; /* White */
+}
+.container {
+    min-height: 50vh; /* Ensure content pushes footer down */
+}

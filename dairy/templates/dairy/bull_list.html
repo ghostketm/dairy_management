@@ -1,0 +1,22 @@
+{% extends 'dairy/base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-12">
+            <h1>Bulls</h1>
+            <ul class="list-group">
+                {% for bull in objects %}
+                <li class="list-group-item">
+                    <a href="{% url 'bull_update' bull.pk %}">{{ bull.name }}</a>
+                    <span class="float-end">
+                        <a href="{% url 'bull_delete' bull.pk %}" class="text-danger">Delete</a>
+                    </span>
+                </li>
+                {% endfor %}
+            </ul>
+            <a href="{% url 'bull_create' %}" class="btn btn-primary float-end mt-3">Create New Bull</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

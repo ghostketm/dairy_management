@@ -1,0 +1,55 @@
+{% extends 'dairy/base.html' %}
+{% load widget_tweaks %}
+
+{% block content %}
+<div class="container mt-5">
+    <style>
+        .form-label, .form-control, .card-header h1 {
+            color: brown;
+        }
+        .btn-custom {
+            background-color: brown;
+            color: white;
+        }
+    </style>
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header text-center">
+                    <h1>{% if form.instance.pk %}Update{% else %}Create{% endif %} Product</h1>
+                </div>
+                <div class="card-body">
+                    <form method="post" class="needs-validation" novalidate>
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="id_name" class="form-label">Name</label>
+                            {{ form.name|add_class:"form-control" }}
+                        </div>
+                        <div class="mb-3">
+                            <label for="id_description" class="form-label">Description</label>
+                            {{ form.description|add_class:"form-control"|attr:"rows:1" }}
+                        </div>
+                        <div class="mb-3">
+                            <label for="id_price" class="form-label">Price</label>
+                            {{ form.price|add_class:"form-control" }}
+                        </div>
+                        <div class="mb-3">
+                            <label for="id_unit_price" class="form-label">Unit Price</label>
+                            {{ form.unit_price|add_class:"form-control" }}
+                        </div>
+                        <div class="mb-3">
+                            <label for="id_unit_measure" class="form-label">Unit Measure</label>
+                            {{ form.unit_measure|add_class:"form-control" }}
+                        </div>
+                        <div class="mb-3">
+                            <label for="id_stock_quantity" class="form-label">Stock Quantity</label>
+                            {{ form.stock_quantity|add_class:"form-control" }}
+                        </div>
+                        <button type="submit" class="btn btn-custom w-100">{% if form.instance.pk %}Update{% else %}Create{% endif %}</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

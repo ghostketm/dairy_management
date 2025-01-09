@@ -1,0 +1,22 @@
+{% extends 'dairy/base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-12">
+            <h1>Heifers</h1>
+            <ul class="list-group">
+                {% for heifer in objects %}
+                <li class="list-group-item">
+                    <a href="{% url 'heifer_update' heifer.pk %}">{{ heifer.name }}</a>
+                    <span class="float-end">
+                        <a href="{% url 'heifer_delete' heifer.pk %}" class="text-danger">Delete</a>
+                    </span>
+                </li>
+                {% endfor %}
+            </ul>
+            <a href="{% url 'heifer_create' %}" class="btn btn-primary float-end mt-3">Create New Heifer</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

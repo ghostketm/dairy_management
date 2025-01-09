@@ -1,0 +1,48 @@
+{% extends 'dairy/base.html' %}
+{% load widget_tweaks %}
+
+{% block content %}
+<style>
+    .form-label {
+        color: brown;
+    }
+    .btn-custom {
+        background-color: brown;
+        color: white;
+    }
+</style>
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header text-center">
+                    <h1>{% if form.instance.pk %}Update{% else %}Create{% endif %} Customer</h1>
+                </div>
+                <div class="card-body">
+                    <form method="post" class="needs-validation" novalidate>
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="id_user" class="form-label">User</label>
+                            {{ form.user|add_class:"form-control" }}
+                        </div>
+                        <div class="mb-3">
+                            <label for="id_phone_number" class="form-label">Phone Number</label>
+                            {{ form.phone_number|add_class:"form-control" }}
+                        </div>
+                        <div class="mb-3">
+                            <label for="id_address" class="form-label">Address</label>
+                            {{ form.address|add_class:"form-control" }}
+                        </div>
+                        <div class="mb-3">
+                            <label for="id_daily_milk_taken" class="form-label">Daily Milk Taken</label>
+                            {{ form.daily_milk_taken|add_class:"form-control" }}
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">{% if form.instance.pk %}Update{% else %}Create{% endif %}</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

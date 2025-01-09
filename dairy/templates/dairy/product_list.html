@@ -1,0 +1,22 @@
+{% extends 'dairy/base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-12">
+            <h1>Products</h1>
+            <ul class="list-group">
+                {% for product in objects %}
+                <li class="list-group-item">
+                    <a href="{% url 'product_update' product.pk %}">{{ product.name }}</a>
+                    <span class="float-end">
+                        <a href="{% url 'product_delete' product.pk %}" class="text-danger">Delete</a>
+                    </span>
+                </li>
+                {% endfor %}
+            </ul>
+            <a href="{% url 'product_create' %}" class="btn btn-primary float-end mt-3">Create New Product</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
